@@ -58,12 +58,13 @@
   
   <el-container>
     <el-header style="text-align: right; font-size: 12px">
-      <el-dropdown>
+      <el-dropdown @command="handleCommand">
         <i class="el-icon-setting" style="margin-right: 15px"></i>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>查看</el-dropdown-item>
+          <!-- <el-dropdown-item>查看</el-dropdown-item>
           <el-dropdown-item>新增</el-dropdown-item>
-          <el-dropdown-item>删除</el-dropdown-item>
+          <el-dropdown-item>删除</el-dropdown-item> -->
+          <el-dropdown-item command="quit">注销</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <span>远是远洋的洋</span>
@@ -98,6 +99,29 @@
       };
       return {
         tableData: Array(20).fill(item)
+      }
+    },
+    methods:{
+      handleCommand(command) {
+        // this.$message('click on item ' + command);
+        this.$confirm('确定要退出登录吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          localStorage.clear()
+          /* this.$message({
+            type: 'success',
+            message: '删除成功!'
+          }); */
+          this.$router.push('/login')
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消退出'
+          });          
+        });
+        
       }
     }
   };
