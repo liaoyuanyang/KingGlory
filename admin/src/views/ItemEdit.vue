@@ -12,7 +12,8 @@
         on-success 表示成功之后的操作 -->
         <el-upload
           class="avatar-uploader"
-          :action="$http.defaults.baseURL + 'upload'"
+          :action="uploadUrl"
+          :headers="getAuthHeaders()"
           :show-file-list="false"
           :on-success="afterUpload">
           <img v-if="model.icon" :src="model.icon" class="avatar">
