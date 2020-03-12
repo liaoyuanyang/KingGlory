@@ -74,12 +74,22 @@ const routes = [
     // 登陆界面的路由
     {
         path: '/login',
-        component: Login
+        component: Login,
+        meta: { isPublic: true } // 自定义的一个字段，表示是否可以公开访问
     }
 ]
 
 const router = new VueRouter({
     routes
+})
+
+// 导航守卫
+router.beforeEach((to, from, next) => {
+    // 如果要访问的路由不是公开的并且没有携带token，就跳转到首页
+    if (!to.meta.isPublic && !localStorage.token) {
+        return next('/login')
+    }
+    next()
 })
 
 export default router
