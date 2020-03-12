@@ -1,10 +1,10 @@
 /**
- * 分类的集合文件
+ * 分类数据模型
  */
 const mongoose = require('mongoose')
 
 // 创建分类集合规则
-const categorySchema = mongoose.Schema({
+const categorySchema = new mongoose.Schema({
     // 分类名称
     name: {
         type: String,

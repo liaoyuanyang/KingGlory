@@ -5,6 +5,11 @@
 const express = require('express')
 
 const app = express()
+
+// 在app实例上添加一个属性，该属性的token生成时需要用到的一个密钥
+// 这个值最好添加到环境变量，而不是放到源代码中
+app.set('serect', 'liaoyuanayng')
+
 const path = require('path')
     // 允许跨域请求
     // 跨域支持一定要写在注册路由的前面!!!!!!!!!
