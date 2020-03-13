@@ -68,6 +68,11 @@ $color in $colors {
     flex-direction: column;
 }
 
+// 换行
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 // 在主轴上的对齐方式
 @each $key,
 $vaule in $flex-jc {
@@ -135,7 +140,7 @@ $type in $spacing-types {
     padding: -0.2rem, -0.6rem;
 }
 
-// nav
+// 快速入口
 .nav {
     .nav-item {
         border-bottom: 3px solid transparent;
@@ -143,5 +148,62 @@ $type in $spacing-types {
         &.active {
             border-bottom: 3px solid #fff;
         }
+    }
+}
+
+// 精灵图
+.sprite {
+    background: url(../images/index.png) no-repeat 0 0;
+    background-size: 28.8462rem;
+    display: inline-block;
+    &.sprite1 {
+        width: 2.3077rem;
+        height: 1.9231rem;
+        background-position: 63.546% 15.517%;
+    }
+    &.sprite2 {
+        width: 2.3077rem;
+        height: 1.9231rem;
+        background-position: 90.483% 15.614%;
+    }
+    &.sprite3 {
+        width: 2.3077rem;
+        height: 1.9231rem;
+        background-position: 36.746% 0.924%;
+    }
+    &.sprite4 {
+        width: 2.3077rem;
+        height: 1.9231rem;
+        background-position: 10.408% 15.517%;
+    }
+    &.sprite5 {
+        width: 2.3077rem;
+        height: 1.9231rem;
+        background-position: 36.467% 15.287%;
+    }
+    &.sprite6 {
+        width: 2.3077rem;
+        height: 1.9231rem;
+        background-position: 9.302% 0.813%;
+    }
+    &.sprite7 {
+        width: 2.3077rem;
+        height: 1.9231rem;
+        background-position: 63.3% 0.927%;
+    }
+    &.sprite8 {
+        width: 2.3077rem;
+        height: 1.9231rem;
+        background-position: 63.3% 0.927%;
+    }
+    &.sprite9 {
+        width: 2.3077rem;
+        height: 1.9231rem;
+        background-position: 0 96.207%;
+    }
+    &.sprite-arrow {
+        width: 0.7692rem;
+        height: 0.7692rem;
+        background-position: 38.577% 52.076%;
     }
 }

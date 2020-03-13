@@ -1,11 +1,6 @@
 /* scss变量 */
 
-
-/* font size
-这里使用了 px to rem 这个插件，当输入 xx.px 之后，按下 Alt+Z,会自动变为 xxx.rem
-默认 px to rem 是按照16px为基准，这里需要在设置中改为13px
-*/
-
+// font size
 $base-font-size:1rem;
 $font-sizes:( xxs:0.6154, // 8px
 xs:0.7692, // 10px
@@ -14,18 +9,14 @@ md:1, // 13px
 lg:1.0769, // 14px
 xl:1.2308, // 16px
 );
-
-/* color */
-
-$colors: ( "primary":#db9e3f, "info":#4b67af, "white":#fff, "light":#f9f9f9, "grey":#999, "grey-1":#666, "dark-1":#343440, "dark":#222, "black":#131528, );
-
-/* flex */
-
+// 这里使用了 px to rem 这个插件，当输入 xx.px 之后，按下 Alt+Z,会自动变为 xxx.rem,默认 px to rem 是按照16px为基准，这里需要在设置中改为13px
+//color
+$colors: ( "primary":#db9e3f, "info":#4b67af, "white":#fff, "light":#f9f9f9, "light-1":#d4d9de, "grey":#999, "grey-1":#666, "dark-1":#343440, "dark":#222, "black":#131528, );
+$border-color:map-get($map: $colors, $key: light-1);
+// flex
 $flex-jc:( start:flex-start, end:flex-end, center:center, between:space-between, around:space-around);
 $flex-ai:( start:flex-start, end:flex-end, center:center, stretch:stretch);
-
-/* margin、padding */
-
+// margin、padding
 $spacing-types:(m:margin, p:padding); // 类型
 $spacing-directions:(t:top, r:right, b:bottom, l:left); // 方向
 $spacing-base-size:1rem; // 基本尺寸
