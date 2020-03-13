@@ -142,11 +142,21 @@ $type in $spacing-types {
 
 // 快速入口
 .nav {
+    display: flex;
     .nav-item {
         border-bottom: 3px solid transparent;
         padding-bottom: 0.2rem;
         &.active {
-            border-bottom: 3px solid #fff;
+            color: map-get($map: $colors, $key: 'primary');
+            border-bottom-color: map-get($map: $colors, $key: 'primary');
+        }
+    }
+    &.nav-inverse {
+        .nav-item {
+            color: map-get($map: $colors, $key: 'white');
+        }
+        .active {
+            border-bottom-color: map-get($map: $colors, $key: 'white');
         }
     }
 }
