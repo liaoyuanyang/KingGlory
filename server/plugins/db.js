@@ -10,4 +10,7 @@ module.exports = app => {
             useCreateIndex: true
         }).then(() => console.log('数据库连接成功...'))
         .catch(err => console.log('数据库连接失败...'))
+
+    // 使用require-all模块一次性将models中的所有文件引入
+    require('require-all')(__dirname + '/../models')
 }

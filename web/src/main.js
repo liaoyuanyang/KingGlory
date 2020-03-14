@@ -15,9 +15,18 @@ import './assets/scss/style.scss'
 // 字体图标
 import './assets/iconfont/iconfont.css'
 
-// Cart
+// Card
 import Card from './components/Card.vue'
-Vue.component('m-cart', Card)
+Vue.component('m-card', Card)
+
+// ListCard
+import ListCard from './components/ListCard.vue'
+Vue.component('m-list-card', ListCard)
+
+import axios from 'axios'
+Vue.prototype.$http = axios.create({
+    baseURL: 'http://localhost:3000/web/api'
+})
 
 new Vue({
     router,

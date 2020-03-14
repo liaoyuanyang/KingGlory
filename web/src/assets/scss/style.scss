@@ -38,6 +38,13 @@ $size in $font-sizes {
     }
 }
 
+.text-ellipsis {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 @each $colorKey,
 $color in $colors {
     // 文字颜色工具类

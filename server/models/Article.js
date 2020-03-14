@@ -11,6 +11,9 @@ const articleSchema = new mongoose.Schema({
     title: { type: String },
     // 文章内容
     body: { type: String },
+}, {
+    // 时间戳(会自动生成创建时间和更新时间)
+    timestamps: true
 })
 
 // 创建文章结合
