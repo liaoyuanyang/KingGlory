@@ -36,7 +36,7 @@ module.exports = app => {
         res.send(newsList)
     })
 
-    // 新闻列表接口
+    // 新闻列表
     router.get('/news/list', async(req, res) => {
         /* const parent = await Category.findOne({
             name: '新闻分类'
@@ -125,7 +125,7 @@ module.exports = app => {
         res.send(await Hero.find())
     })
 
-    // 英雄列表接口
+    // 英雄列表
     router.get('/heroes/list', async(req, res) => {
         // 聚合查询
         const parent = await Category.findOne({ name: '英雄分类' })
@@ -151,6 +151,15 @@ module.exports = app => {
             }).limit(10).lean()
         })
         res.send(cates)
+    })
+
+    // 文章详情
+    router.get('/articles/:id', async(req, res) => {
+        const article = await Article.findById(req.params.id).lean()
+        article.related = await Article.find().where({
+            categories: { $in: article.categories }
+        }).limit(2)
+        res.send(article)
     })
 
 

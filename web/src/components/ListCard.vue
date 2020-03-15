@@ -10,12 +10,16 @@
         <swiper ref="list" :options="{autoHeight:true}" @slide-change="()=> active = $refs.list.swiper.realIndex">
           <swiper-slide v-for="(category,i) in categories" :key="i">
             <div v-if="category.newsList">
-              <div class="py-2 fs-lg d-flex" v-for="(item,j) in category.newsList" :key="j">
+              <router-link tag="div"
+              class="py-2 fs-lg d-flex"
+               v-for="(item,j) in category.newsList" 
+               :key="j"
+               :to="`/articles/${item._id}`">
                 <span class="text-info">[{{item.categoryName}}]</span>
                 <span class="px-2">|</span>
                 <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{item.title}}</span>
                 <span class="text-grey-1 fs-sm">{{item.createdAt | date}}</span>
-              </div>
+              </router-link>
             </div>
             <div v-if="category.heroList" style="margin:0 -0.5rem;" class="d-flex flex-wrap">
               <div class="p-2 fs-lg text-center"
