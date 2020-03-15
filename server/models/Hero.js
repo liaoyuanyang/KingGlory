@@ -42,6 +42,6 @@ const heroSchema = new mongoose.Schema({
 })
 
 // 创建英雄结合
-const Hero = mongoose.model('Hero', heroSchema)
+const Hero = mongoose.model('Hero', heroSchema, 'heroes')
 
 module.exports = Hero

@@ -25,7 +25,7 @@
     </div>
     <!-- end of nav icons -->
 
-    <!-- card -->
+    <!-- 新闻资讯 -->
     <m-list-card icon="Menu" title="新闻资讯" :categories="newsCates">
        <!--  <div class="py-2 fs-lg d-flex" v-for="(news,i) in newsCates.newsList" :key="i">
         <span>[{{news.categoryName}}]</span>
@@ -34,6 +34,11 @@
         <span>{{news.createdAt}}</span>
       </div> -->
     </m-list-card>
+
+    <!-- 英雄列表 -->
+    <m-list-card icon="wangzherongyao" title="英雄列表" :categories="heroCates">
+    </m-list-card>
+
 
     <m-card icon="Menu" title="英雄列表"></m-card>
     <m-card icon="Menu" title="精彩视频"></m-card>
@@ -103,17 +108,22 @@ export default {
           }))
         },
       ], */
-      newsCates:[]
+      newsCates:[],
+      heroCates:[]
     }
   },
   methods:{
     async fetchNewsCates(){
       const res = await this.$http.get('news/list')
       this.newsCates = res.data
-      console.log(this.newsCates)
+    },
+    async fetchHeroCates(){
+      const res = await this.$http.get('heroes/list')
+      this.heroCates = res.data
     }
   },
   created(){
+    this.fetchHeroCates(),
     this.fetchNewsCates()
   }
 }
