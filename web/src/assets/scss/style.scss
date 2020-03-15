@@ -145,6 +145,21 @@ $type in $spacing-types {
     border-radius: 0.1538rem;
     font-size: map-get($map: $font-sizes, $key: sm) * $base-font-size;
     padding: -0.2rem, -0.6rem;
+    &.btn-lg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i {
+            color: map-get($map: $colors, $key: 'primary');
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        background: map-get($map: $colors, $key: 'white-1');
+        border: 1px solid map-get($map: $colors, $key: 'white-2');
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    }
 }
 
 // 快速入口

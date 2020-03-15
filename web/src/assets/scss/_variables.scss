@@ -11,7 +11,7 @@ xl:1.2308, // 16px
 );
 // 这里使用了 px to rem 这个插件，当输入 xx.px 之后，按下 Alt+Z,会自动变为 xxx.rem,默认 px to rem 是按照16px为基准，这里需要在设置中改为13px
 //color
-$colors: ( "primary":#db9e3f, "info":#464f73, "info-title":#4393E4, "white":#fff, "light":#f9f9f9, "light-1":#d4d9de, "grey":#999, "grey-1":#666, "dark-1":#343440, "dark":#222, "black":#131528, );
+$colors: ( "danger":#791a16, "primary":#db9e3f, "info":#464f73, "blue-1":#203795, "info-title":#4393E4, "white":#fff, "white-1":#fcfcfc, "white-2":#eceef0, "light":#f9f9f9, "light-1":#d4d9de, "grey":#999, "grey-1":#666, "dark-1":#343440, "dark":#222, "black":#131528, );
 $border-color:map-get($map: $colors, $key: light-1);
 // flex
 $flex-jc:( start:flex-start, end:flex-end, center:center, between:space-between, around:space-around);

@@ -22,13 +22,15 @@
               </router-link>
             </div>
             <div v-if="category.heroList" style="margin:0 -0.5rem;" class="d-flex flex-wrap">
-              <div class="p-2 fs-lg text-center"
+              <router-link tag='div' 
+              :to="`/heroes/${item._id}`"
+              class="p-2 fs-lg text-center"
               style="width:20%;"
                v-for="(item,j) in category.heroList"
                :key="j">
                  <img :src="item.avatar" class="w-100" alt="">
                  <div>{{item.name}}</div>
-              </div>
+              </router-link tag='div'>
             </div>
           </swiper-slide>
         </swiper>

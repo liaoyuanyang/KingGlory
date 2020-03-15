@@ -10,6 +10,10 @@
           <el-form-item label="名称">
             <el-input v-model="model.name"></el-input>
           </el-form-item>
+          <!-- 称号 -->
+          <el-form-item label="称号">
+            <el-input v-model="model.title"></el-input>
+          </el-form-item>
           <!-- 头像 -->
           <el-form-item label="头像">
             <!-- action 表示要将图片上传到哪个接口，接口保存后图片后，
@@ -17,16 +21,28 @@
             on-success 表示成功之后的操作 -->
             <el-upload
               class="avatar-uploader"
-              :action="$http.defaults.baseURL + 'upload'"
+              :action="uploadUrl"
+              :headers = "getAuthHeaders()"
               :show-file-list="false"
-              :on-success="afterUpload">
+              :on-success="res => $set(model,'avatar',res.url)">
               <img v-if="model.avatar" :src="model.avatar" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-          <!-- 称号 -->
-          <el-form-item label="称号">
-            <el-input v-model="model.title"></el-input>
+          <!-- 海报 -->
+          <el-form-item label="海报">
+            <!-- action 表示要将图片上传到哪个接口，接口保存后图片后，
+            会返回一个图片的 URL 地址，前端拿到地址后将图片展示出来
+            on-success 表示成功之后的操作 -->
+            <el-upload
+              class="avatar-uploader"
+              :action="uploadUrl"
+              :headers = "getAuthHeaders()"
+              :show-file-list="false"
+              :on-success="res => $set(model,'banner',res.url)">
+              <img v-if="model.banner" :src="model.banner" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
           </el-form-item>
           <!-- 类型 -->
           <el-form-item label="类型">
@@ -107,12 +123,19 @@
                <el-form-item label="图标">
                  <el-upload
                     class="avatar-uploader"
-                    :action="$http.defaults.baseURL + 'upload'"
+                    :action="uploadUrl"
+                    :headers = "getAuthHeaders()"
                     :show-file-list="false"
                     :on-success="res => $set(item,'icon',res.url)">
                     <img v-if="item.icon" :src="item.icon" class="avatar">
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                   </el-upload>
+              </el-form-item>
+              <el-form-item label="冷却值"  style="margin-top:1rem;">
+                <el-input v-model="item.delay"></el-input>
+              </el-form-item>
+              <el-form-item label="消耗"  style="margin-top:1rem;">
+                <el-input v-model="item.cost"></el-input>
               </el-form-item>
               <el-form-item label="描述">
                 <el-input v-model="item.description" type="textarea"></el-input>
@@ -122,6 +145,30 @@
               </el-form-item>
               <el-form-item>
                 <el-button type="danger" @click="model.skills.splice(i,1)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+        <!-- 最佳搭档 -->
+        <el-tab-pane label='最佳搭档' name="partners">
+          <el-button style="margin-bottom:1rem;" size="small"  @click="model.partners.push({})"> 
+            <i class="el-icon-plus" ></i> 添加英雄
+          </el-button>
+          <el-row type="flex" style="flex-wrap:wrap">
+            <el-col :md="12" v-for="(item,i) in model.partners" :key="i">
+              <el-form-item label="英雄"  style="margin-top:1rem;">
+                <el-select v-model="item.hero" filterable>
+                  <el-option v-for="hero in heroes" 
+                  :value="hero._id"
+                  :label="hero.name"
+                  :key="hero._id"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input v-model="item.description" type="textarea"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="danger" @click="model.partners.splice(i,1)">删除</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -149,19 +196,21 @@ export default {
         scores:{
           difficult:0
         },
-        skills:[]
+        skills:[],
+        partners:[]
       },
       // 英雄分类数据
       categories:[],
       // 物品分类数据
       items:[],
+      heroes:[]
     }
   },
   methods:{
     // 将服务器返回的 url 绑定到 model 上
-    async afterUpload(res){
+    /* async afterUpload(res){
       this.model.avatar = res.url 
-    },
+    }, */
     // 保存英雄数据的方法
     async save(){
       let res
@@ -173,7 +222,8 @@ export default {
       else{
         res = await this.$http.post('rest/heroes',this.model)
       }
-      this.$router.push('/heroes/list')
+      // this.$router.push('/heroes/list')
+      this.$router.go(0); // 保存后自动刷新页面
       this.$message({
         type:'success',
         message:'保存成功'
@@ -195,9 +245,14 @@ export default {
     async fetchItems(){
       const res = await this.$http.get(`rest/items/`)
       this.items = res.data
+    },
+    async fetchHeroes(){
+      const res = await this.$http.get(`rest/heroes/`)
+      this.heroes = res.data
     }
   },
   created(){
+    this.fetchHeroes()
     this.fetchItems()
     this.fetchCategories()
     this.id && this.fetch() // 有 id 才执行 fetch() 获取数据

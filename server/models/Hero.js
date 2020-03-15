@@ -9,6 +9,8 @@ const heroSchema = new mongoose.Schema({
     name: { type: String },
     // 头像
     avatar: { type: String },
+    // 海报
+    banner: { type: String },
     // 称号
     title: { type: String },
     // 分类
@@ -24,6 +26,8 @@ const heroSchema = new mongoose.Schema({
     skills: [{
         icon: { type: String },
         name: { type: String },
+        delay: { type: String }, // 冷却值
+        cost: { type: String }, // 消耗
         description: { type: String },
         tips: { type: String },
     }],
