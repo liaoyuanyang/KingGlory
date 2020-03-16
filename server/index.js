@@ -22,6 +22,10 @@ app.use(express.json())
 // app.use('/upload', express.static(__dirname + '/uploads'))
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
+
+app.use('/', express.static(path.join(__dirname, '/web')))
+app.use('/admin', express.static(path.join(__dirname, '/admin')))
+
 // 引入admin的路由方法，将网站实例app作为一个参数传进去
 require('./routes/admin')(app)
 
